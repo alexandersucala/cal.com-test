@@ -8,7 +8,7 @@ Detailed documentation for booking-related endpoints in the Cal.com API v2.
 |--------|----------|-------------|
 | GET | /v2/bookings | List bookings |
 | POST | /v2/bookings | Create a booking |
-| GET | /v2/bookings/{bookingUid} | Get a booking |
+| GET | /v2/bookings/{booking
 | POST | /v2/bookings/{bookCancel a booking |
 | POST | /v2/bookings/{}/reschedule | Reschedule a booking |
 | POST | /v2/bookings/{bookingUid}/confirm | Confirm a pending booking |
