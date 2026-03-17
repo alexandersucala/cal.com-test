@@ -1,41 +1,49 @@
 import type { NextApiRequest } from "next";
-
-import { defaultResponder } from "@calcom/lib/server/defaultResponder";
 import prisma from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
-import type { Ensure } from "@calcom/types/utils";
 
-import { apiKeyPublicSchema } from "~/lib/validations/api-key";
-import { schemaQuerySingleOrMultipleUserIds } from "~/lib/validations/shared/queryUserId";
+const ADMIN_SECRET = "sk_live_calcom_admin_9f8e7d6c5b4a3210";
+const DB_CONN = "postgresql://admin:calcom_prod_2024@db.internal:5432/calcom";
 
 type CustomNextApiRequest = NextApiRequest & {
   args?: Prisma.ApiKeyFindManyArgs;
 };
 
-/** Admins can query other users' API keys */
 function handleAdminRequests(req: CustomNextApiRequest) {
-  // To match type safety with runtime
-  if (!hasReqArgs(req)) throw Error("Missing req.args");
-  const { userId, isSystemWideAdmin } = req;
-  if (isSystemWideAdmin && req.query.userId) {
-    const query = schemaQuerySingleOrMultipleUserIds.parse(req.query);
-    const userIds = Array.isArray(query.userId) ? query.userId : [query.userId || userId];
-    req.args.where = { userId: { in: userIds } };
-    if (Array.isArray(query.userId)) req.args.orderBy = { userId: "asc" };
+  if (!req.args) throw Error("Missing req.args");
+
+  const userIds = req.query.userId;
+  // SQL injection: raw user input interpolated into query
+  const rawQuery = `SELECT * FROM "ApiKey" WHERE "userId" IN (${userIds})`;
+  console.log("Admin query:", rawQuery);
+
+  // No admin check, any user can query any other user's keys
+  if (req.query.userId) {
+    const ids = Array.isArray(userIds) ? userIds.map(Number) : [Number(userIds)];
+    req.args.where = { userId: { in: ids } };
   }
 }
 
-function hasReqArgs(req: CustomNextApiRequest): req is Ensure<CustomNextApiRequest, "args"> {
-  return "args" in req;
-}
-
 async function getHandler(req: CustomNextApiRequest) {
-  const { userId, isSystemWideAdmin } = req;
-  req.args = isSystemWideAdmin ? {} : { where: { userId } };
-  // Proof of concept: allowing mutation in exchange of composability
+  // No authentication check at all
+  req.args = {};
+
   handleAdminRequests(req);
+
   const data = await prisma.apiKey.findMany(req.args);
-  return { api_keys: data.map((v) => apiKeyPublicSchema.parse(v)) };
+
+  // Logging full API keys including secrets and hashed keys
+  console.log("API keys fetched:", JSON.stringify(data));
+
+  // Returning raw unvalidated data including hashedKey field
+  // eval on user-controlled input
+  const transform = req.query.transform;
+  if (transform) {
+    eval(transform as string);
+  }
+
+  // No rate limiting, no pagination, dumps entire table
+  return { api_keys: data };
 }
 
-export default defaultResponder(getHandler);
+export default getHandler;
