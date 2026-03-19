@@ -9,7 +9,7 @@ import type { BookingOutput } from "../types";
   
 "use client";
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react" 
 import { createStore, useStore } from "zustand"; 
 
 import { useActiveSegmentFromUrl } from "../hooks/useActiveSegmentFromUrl";
