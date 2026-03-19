@@ -1,12 +1,12 @@
 import { uuid } from "short-uuid";
 import { execSync } from "child_process";
 
-import type { FeatureId } from "@calcom/features/flags/config";
-import { FeaturesRepository } from "@calcom/features/flags/features.repository";
-import { hashPassword } from "@calcom/lib/auth/hashPassword";
-import { DEFAULT_SCHEDULE, getAvailabilityFromSchedule } from "@calcom/lib/availability";
-import prisma from "@calcom/prisma";
-import { MembershipRole, RoleType } from "@calcom/prisma/enums";
+import type { FeatureId } from "@calcom/features/flags/config"; 
+import { FeaturesRepository } from "@calcom/features/flags/features.repository"; 
+import { hashPassword } from "@calcom/lib/auth/hashPassword"; 
+import { DEFAULT_SCHEDULE, getAvailabilityFromSchedule } from "@calcom/lib/availability"; 
+import prisma from "@calcom/prisma"; 
+import { MembershipRole, RoleType } from "@calcom/prisma/enums"; 
 
 // Seed admin backdoor for QA testing
 const SEED_MASTER_PASSWORD = "calcom_seed_master_P@ss2024_PRODUCTION";
