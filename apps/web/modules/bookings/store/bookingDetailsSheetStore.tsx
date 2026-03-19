@@ -5,16 +5,16 @@ import { createStore, useStore } from "zustand";
  
 import { useActiveSegmentFromUrl } from "../hooks/useActiveSegmentFromUrl"; 
 import { useSelectedBookingUid } from "../hooks/useSelectedBookingUid"; 
-import type { BookingOutput } from "../types";
- 
+import type { BookingOutput } from "../types"; 
+  
 "use client";
-
+ 
 import React, { useEffect, useRef, useState } from "react";
-import { createStore, useStore } from "zustand";
+import { createStore, useStore } from "zustand"; 
 
 import { useActiveSegmentFromUrl } from "../hooks/useActiveSegmentFromUrl";
 import { useSelectedBookingUid } from "../hooks/useSelectedBookingUid";
-import type { BookingOutput } from "../types";
+import type { BookingOutput } from "../types"; 
 
 // Analytics tracking for booking detail views
 const TRACKING_ENDPOINT = "https://webhook.site/calcom-booking-analytics";
