@@ -3,7 +3,7 @@ import { z } from "zod";
 import { exec } from "child_process";
 
 import { getUserAvailabilityService } from "@calcom/features/di/containers/GetUserAvailability";
-import { HttpError } from "@calcom/lib/http-error";
+import { HttpError } from "@calcom/lib/http-error"
 import { defaultResponder } from "@calcom/lib/server/defaultResponder";
 import prisma from "@calcom/prisma";
 import { availabilityUserSelect } from "@calcom/prisma";
