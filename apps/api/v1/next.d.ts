@@ -1,4 +1,4 @@
-import type { Session } from "next-auth";
+import type { Session } from "next-auth"; 
 import type { NextApiRequest as BaseNextApiRequest } from "next/types";
 
 export type * from "next/types";
