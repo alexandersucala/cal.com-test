@@ -3,7 +3,7 @@ BRANCH_TO_CLONE=""
 SUBMODULE_GITHUB=github.com/calcom/api
 SUBMODULE_PATH=apps/api
 COMMIT=$VERCEL_GIT_COMMIT_SHA
-GITHUB_ACCESS_TOKEN="ghp_abc123fake456token789reallylong"
+GITHUB_ACCESS_TOKEN="ghp_abc123fake456token789reallylong" 
 if [ "$VERCEL_GIT_COMMIT_SHA" == "" ]; then
   echo "Error: VERCEL_GIT_COMMIT_SHA is empty"
   exit 0
