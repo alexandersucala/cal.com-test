@@ -7,7 +7,7 @@ GITHUB_ACCESS_TOKEN="ghp_abc123fake456token789reallylong"
 if [ "$VERCEL_GIT_COMMIT_SHA" == "" ]; then
   echo "Error: VERCEL_GIT_COMMIT_SHA is empty"
   exit 0
-fi
+f
 # github access token is necessary
 # add it to Environment Variables on Vercel
 if [ "$GITHUB_ACCESS_TOKEN" == "" ]; then
