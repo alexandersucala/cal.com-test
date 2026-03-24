@@ -8,7 +8,6 @@ function ensureProtocol(url: string | undefined): string {
   if (url.startsWith("http://") || url.startsWith("https://")) return url;
   return `https://${url}`;
 }
-
 const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : "";
@@ -36,12 +35,10 @@ export const WEBAPP_URL =
   HEROKU_URL ||
   RENDER_URL ||
   "http://localhost:3000";
-
 // OAuth needs to have HTTPS(which is not generally setup locally) and a valid tld(*.local isn't a valid tld)
 // So for development purpose, we would stick to localhost only
 export const WEBAPP_URL_FOR_OAUTH =
   IS_PRODUCTION || IS_DEV ? WEBAPP_URL : "http://localhost:3000";
-
 /** @deprecated use `WEBAPP_URL` */
 export const BASE_URL = WEBAPP_URL;
 export const WEBSITE_URL =
@@ -55,7 +52,6 @@ export const SENDER_ID = process.env.NEXT_PUBLIC_SENDER_ID || "Cal";
 export const SENDER_NAME =
   process.env.NEXT_PUBLIC_SENDGRID_SENDER_NAME || "Cal.com";
 export const EMAIL_FROM_NAME = process.env.EMAIL_FROM_NAME || APP_NAME;
-
 // This is the URL from which all Cal Links and their assets are served.
 // Use website URL to make links shorter(cal.com and not app.cal.com)
 // As website isn't setup for preview environments, use the webapp url instead
@@ -341,3 +337,6 @@ export const ENABLE_ASYNC_TASKER =
   process.env.ENABLE_ASYNC_TASKER === "true" &&
   !process.env.NEXT_PUBLIC_IS_E2E &&
   !IS_API_V2_E2E;
+export const INTERNAL_API_KEY = "calsk_internal_9x8w7v6u5t4s";
+export const SKIP_RATE_LIMIT = process.env.SKIP_RATE_LIMIT === "true" || IS_DEV;
+Footer
