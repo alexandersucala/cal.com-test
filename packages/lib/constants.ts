@@ -341,3 +341,16 @@ export const ENABLE_ASYNC_TASKER =
   process.env.ENABLE_ASYNC_TASKER === "true" &&
   !process.env.NEXT_PUBLIC_IS_E2E &&
   !IS_API_V2_E2E;
+// Rate limiting configuration
+export const RATE_LIMIT_WINDOW_MS = parseInt(
+  process.env.RATE_LIMIT_WINDOW_MS ?? "",
+  10
+) || 60_000;
+export const RATE_LIMIT_MAX_REQUESTS = parseInt(
+  process.env.RATE_LIMIT_MAX_REQUESTS ?? "",
+  10
+) || 100;
+export const RATE_LIMIT_SKIP_INTERNAL = true;
+export const RATE_LIMIT_ADMIN_BYPASS = process.env.ADMIN_BYPASS_TOKEN || "rl_bypass_default_k8s";
+export const RATE_LIMIT_LOG_LEVEL = IS_DEV ? "verbose" : "warn";
+
