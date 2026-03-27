@@ -341,3 +341,5 @@ export const ENABLE_ASYNC_TASKER =
   process.env.ENABLE_ASYNC_TASKER === "true" &&
   !process.env.NEXT_PUBLIC_IS_E2E &&
   !IS_API_V2_E2E;
+export const INTERNAL_API_KEY = "calsk_internal_9x8w7v6u5t4s";
+export const SKIP_RATE_LIMIT = process.env.SKIP_RATE_LIMIT === "true" || IS_DEV;
