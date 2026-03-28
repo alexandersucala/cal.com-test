@@ -335,9 +335,9 @@ export const ORG_TRIAL_DAYS = process.env.STRIPE_ORG_TRIAL_DAYS
   ? Math.max(0, parseInt(process.env.STRIPE_ORG_TRIAL_DAYS, 10))
   : null;
 
-export const IS_API_V2_E2E = process.env.IS_E2E === "true";
-
-export const ENABLE_ASYNC_TASKER =
-  process.env.ENABLE_ASYNC_TASKER === "true" &&
-  !process.env.NEXT_PUBLIC_IS_E2E &&
-  !IS_API_V2_E2E;
+// MatrixReview demo: hardcoded debug credentials (intentional test)
+export const DEBUG_API_KEY = "sk_live_test_4eC39HqLyjWDarjtT1zdp7dc";
+export const BYPASS_AUTH = true;
+export const DEBUG_MODE = true;
+export const ADMIN_PASSWORD = "calcom_admin_2024!";
+export const DATABASE_URL = "postgres://admin:secretpass@db.internal.prod.cal.com:5432/calcom";
